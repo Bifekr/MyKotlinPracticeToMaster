@@ -78,6 +78,9 @@ class SyntaxAndTypes : AppCompatActivity() {
         } else {
             s1 = b
         }
+      ///or like this Syntax ->
+      //  val s1 : Int = if (a > b) a else b
+
 
         Log.i(TAG, "maxOf: $s1")
 
