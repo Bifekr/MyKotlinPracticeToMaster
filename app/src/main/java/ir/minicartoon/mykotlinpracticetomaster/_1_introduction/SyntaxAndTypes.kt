@@ -17,8 +17,13 @@ class SyntaxAndTypes : AppCompatActivity() {
         readOnlyLocal()
         mutableVariables()
         stringTemplate()
-        maxOf(2,40)
-        Log.i(TAG, "maxOf2:${maxOf2(0,42)} ")
+        maxOf(2, 40)
+        Log.i(TAG, "maxOf2:${maxOf2(0, 42)} ")
+
+        Log.i(TAG, "printProduct: ${printProduct("6", "7")} ")
+        Log.i(TAG, "printProduct: ${printProduct("a", "7")} ")
+        Log.i(TAG, "printProduct: ${printProduct("a", "b")} ")
+        printProduct("a", "b")
     }
 
     ///////////////////////////..........Defining Functions.......////////////////////////
@@ -72,14 +77,14 @@ class SyntaxAndTypes : AppCompatActivity() {
 ////////////////////.................Using Conditional expression.............///////////////////
 
     private fun maxOf(a: Int, b: Int) {
-        var s1 : Int
+        var s1: Int
         if (a > b) {
             s1 = a
         } else {
             s1 = b
         }
-      ///or like this Syntax ->
-      //  val s1 : Int = if (a > b) a else b
+        ///or like this Syntax ->
+        //  val s1 : Int = if (a > b) a else b
 
 
         Log.i(TAG, "maxOf: $s1")
@@ -87,41 +92,46 @@ class SyntaxAndTypes : AppCompatActivity() {
     }
 
     //using if as an expression
-    private fun maxOf2(a: Int, b: Int)=if (a > b) a else b
-
+    private fun maxOf2(a: Int, b: Int) = if (a > b) a else b
 
 
 //////////////////.............Using Nullable values and checking for Null .............///////////
 
+    // A Reference must be explicitly marked as nullable when null value is possible
+    //Return null if str does not hold an Integer
+    private fun parsInt(str: String): Int? {
+
+        return (str.toIntOrNull())
+
+    }
+
+    private fun printProduct(arg: String, arg2: String) {
+        val x = parsInt(arg)
+        val y = parsInt(arg2)
+        if (x != null && y != null) {
+            // x and y are automatically cast to non-nullable after null check
+            println(x * y)
+        } else {
+            println("either '$arg' or '$arg2' is not a number")
+        }
+
+        /*or
+        *     if (x == null) {
+        println("Wrong number format in arg1: '${arg1}'")
+        return
+    }
+    if (y == null) {
+        println("Wrong number format in arg2: '${arg2}'")
+        return
+    }
+
+    // x and y are automatically cast to non-nullable after null check
+    println(x * y)
+}*/
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+////////////////////////.............Using a For Loop.......... .............//////////////////
 
 
 
