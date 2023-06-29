@@ -14,16 +14,24 @@ class SyntaxAndTypes : AppCompatActivity() {
         Log.i(TAG, "sum of 3 and 5 is: ${sum(2, 3)} ")
         Log.i(TAG, "sum2 of 3 and 5 is: ${sum2(2, 3)} ")
         sum3(8, 3)
+
         readOnlyLocal()
         mutableVariables()
+
         stringTemplate()
+
         maxOf(2, 40)
         Log.i(TAG, "maxOf2:${maxOf2(0, 42)} ")
 
         Log.i(TAG, "printProduct: ${printProduct("6", "7")} ")
         Log.i(TAG, "printProduct: ${printProduct("a", "7")} ")
         Log.i(TAG, "printProduct: ${printProduct("a", "b")} ")
-        printProduct("a", "b")
+        printProduct("a", "2")
+
+        forLoop()
+        forLoop2()
+        whileLoop()
+        intOutOfRange()
     }
 
     ///////////////////////////..........Defining Functions.......////////////////////////
@@ -112,7 +120,7 @@ class SyntaxAndTypes : AppCompatActivity() {
             // x and y are automatically cast to non-nullable after null check
             println(x * y)
         } else {
-            println("either '$arg' or '$arg2' is not a number")
+            Log.i(TAG, "printProduct: either '$arg' or '$arg2' is not a number ")
         }
 
         /*or
@@ -134,23 +142,107 @@ class SyntaxAndTypes : AppCompatActivity() {
 ////////////////////////.............Using a For Loop.......... .............//////////////////
 
 
+    private fun forLoop() {
+        val items = listOf<String>("apple", "orange", "kiwi")
+        for (item in items) {
+            Log.i(TAG, "forLoop: $item")
+        }
+
+    }
+
+    private fun forLoop2() {
+        val items = listOf("apple", "orange", "kiwi")
+        for (item in items.indices) {
+            // Log.i(TAG, "forLoop2: item at $item is $items[$item]")
+            Log.i(TAG, "forLoop2: item at $item is ${items[item]}")
+        }
+    }
 
 
+////////////////////////.............Using a while Loop.......... .............//////////////////
+
+    private fun whileLoop() {
+        val items = listOf<String>("apple", "orange", "kiwi")
+        var index = 0
+        while (index < items.size) {
+            Log.i(TAG, "whileLoop: item at index $index is ${items[index]}")
+            index++
+        }
+    }
 
 
+////////////////////////.............Using a when Loop.......... .............//////////////////
 
 
+    //sampleStart
+    private fun describe(obj: Any): String =
+        when (obj) {
+            1 -> "One"
+            "Hello" -> "Greeting"
+            is Long -> "Long"
+            !is String -> "Not a string"
+            else -> "Unknown"
+        }
+//sampleEnd
+
+    fun describe2() {
+        Log.i(TAG, "main: ${describe(1)}")
+        println(describe("Hello"))
+        println(describe(1000L))
+        println(describe(2))
+        println(describe("other"))
+    }
 
 
+////////////////////////.............Using Ranges.......... ............./////////////////////
+
+    //Check if a number is within a range using in operator:
+    fun main(args: Array<String>) {
+//sampleStart
+        val x = 10
+        val y = 9
+        if (x in 1..y+1) {
+            println("fits in range")
+        }
+//sampleEnd
+    }
 
 
+//Check if a number is out of range:
+
+    private fun intOutOfRange() {
+        val list = listOf("a", "b", "c", "d", "e")
+        if (list.size !in list.indices) {
+            Log.i(TAG, "intOutOfRange: list size is out of valid list indices range too")
+            Log.i(TAG, "intOutOflist.indices: ${list.indices}")
+            Log.i(TAG, "intOutOflist.size: ${list.size}")
+        }
+    }
+
+//Iterating over a range:
+
+    fun iteratingOverRange(args: Array<String>) {
+
+        for (x in 1..5) {
+            print(x)
+        }
+
+    }
+  //  or over a progression:
+
+    fun progression(args: Array<String>) {
+
+        for (x in 1..10 step 2) {
+            print(x)
+        }
+        for (x in 9 downTo 0 step 3) {
+            print(x)
+        }
+
+    }
 
 
-
-
-
-
-
+///////////////////////...............Using collections...................//////////////////////
 
 
 
